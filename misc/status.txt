@@ -1,0 +1,3 @@
+Angela Ellis
+
+I followed the instructions on wiki.carleton and downloaded Kali and Metasploitable2. I plan to use Kali on my laptop if I find it's convenient. I'm sure I'll have a better idea of what I want to do after I've used Kali a bit more.
