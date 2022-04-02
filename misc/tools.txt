@@ -1,0 +1,26 @@
+Angela Ellis
+CS 338
+tools.txt
+
+1. curl ifconfig.me
+2. host "hostname"
+3. nslookup "ip addess"
+4. scp "filename" ellisa3@mantis.mathcs.carleton.edu:
+5. netstat -l | grep -w ':port_number'
+6. nmap -sT -O "hostname"
+7. wget "url" -O "filename"
+8. curl --verbose "url"
+9. curl -s -D - -o /dev/null "url"
+
+
+
+citations
+
+1 & 2. https://opensource.com/article/18/5/how-find-ip-address-linux
+3.https://www.javatpoint.com/get-hostname-from-ip-address#What-is
+4. https://unix.stackexchange.com/questions/106480/how-to-copy-files-from-one-machine-to-another-using-ssh
+5. https://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-sg-en-4/s1-server-ports.html6. https://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-sg-en-4/s1-server-ports.html
+6. https://www.tecmint.com/find-out-which-process-listening-on-a-particular-port/
+7. https://unix.stackexchange.com/questions/12352/how-to-make-wget-save-the-web-page-contents-to-a-file
+8. Jeff's video "A Brief Intro to HTTP" ~13:28
+9. https://stackoverflow.com/questions/3252851/how-to-display-request-headers-with-command-line-curl
