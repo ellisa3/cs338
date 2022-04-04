@@ -1,0 +1,16 @@
+Angela Ellis
+CS 338
+wireshark.txt
+
+===== DAYTIME =====
+
+5. Synchronized sequence number
+6. Acknowledgement
+7. Finished
+8. Daytime server because they sent the first FIN.
+
+
+===== HTTP =====
+
+
+===== QUESTIONS =====
