@@ -28,30 +28,56 @@ because Mal does not have access to Bob's private key. However, this strategy
 does not verify that the message came from Alice because Mal could create a new 
 message and a new digest and send them both to Bob.
 
-3. Alice says hello to Bob, who follows up by sending a random number R to Alice. Alice responds with E(S_A, R). Bob uses Alice's public key to compute E(P_A, E(S_A, R)) == R. Then, Alice and Bob use Diffie-Hellman to agree on a shared secret key K. They agree to use AES to encrypt/decrypt the message. Alice sends AES(K,M) to Bob. Bob decrypts the message by doing AES_D(K,M).
+3. Alice says hello to Bob, who follows up by sending a random number R to Alice. 
+Alice responds with E(S_A, R). Bob uses Alice's public key to compute E(P_A, E(S_A, R)) == R. 
+Then, Alice and Bob use Diffie-Hellman to agree on a shared secret key K. They agree to 
+use AES to encrypt/decrypt the message. Alice sends AES(K,M) to Bob. Bob decrypts the
+message by doing AES_D(K,M).
 
-To keep Eve from reading the message, Alice and Bob use AES to encrypt M. Eve would not have access to K and therefore could not decrypt the message. Bob is certain that he is speaking with Alice because he is able to decrypt the random number using Alice's public key. Under the assumption that only Alice has access to S_A, Bob knows that only Alice could have encrypted M with S_A. Because PITM is impossible, there is no threat that Mal is sitting between Alice and Bob simply forwarding on their information and then establishing a separate DH secret key with both Bob and Alice to later have access to their messages.
+To keep Eve from reading the message, Alice and Bob use AES to encrypt M. Eve would 
+not have access to K and therefore could not decrypt the message. Bob is certain that 
+he is speaking with Alice because he is able to decrypt the random number using Alice's 
+public key. Under the assumption that only Alice has access to S_A, Bob knows that only 
+Alice could have encrypted M with S_A. Because PITM is impossible, there is no threat 
+that Mal is sitting between Alice and Bob simply forwarding on their information and then 
+establishing a separate DH secret key with both Bob and Alice to later have access to their messages.
 
 ~~~~~~~~~~ Questions about breaking security ~~~~~~~~~~
 
 4. Alice could claim
-	- Mal changed the contract and sent [C || Sig'] to Bob where Sig' = E(P_A, D'). Mal created a new digest D' using the contract that Mal constructed, C, such that D' = H(C). Mal had access to Alice's private key.
+	- Mal changed the contract and sent [C || Sig'] to Bob where Sig' = E(P_A, D'). 
+	Mal created a new digest D' using the contract that Mal constructed, C, such that D' = H(C). 
+	Mal had access to Alice's private key.
 
-	- Mal changed Alice's original contract and sent [C || Sig'] where Sig' = E(S_M, D'). Mal created a digest to match Mal's contract C and encrypted it using Mal's secret key. Bob mistakenly used Mal's public key to decrypt the digest and confirm that he had received the correct contract.
+	- Mal changed Alice's original contract and sent [C || Sig'] where Sig' = E(S_M, D'). 
+	  Mal created a digest to match Mal's contract C and encrypted it using Mal's secret key. 
+	  Bob mistakenly used Mal's public key to decrypt the digest and confirm that he had received the correct contract.
 
-	- Mal changed Alice's original contract but did not bother to adjust the signature. When Bob received the contract from whom he believed was Alice, he did not bother to verify that that contract hashed matched up with the result of decrypting the signature.
+	- Mal changed Alice's original contract but did not bother to adjust the signature. 
+	  When Bob received the contract from whom he believed was Alice, he did not bother to 
+	  verify that that contract hashed matched up with the result of decrypting the signature.
 
-The first two scenarios are plausible because private keys can be stolen and misued. Similarly, without a certificate authority, Bob can be led to believe that the public key belonging to Mal is actually Alice's public key. The last scenario is less likely because it assumes that Bob is too lazy to confirm that the message he received from Alice is what she intended for him to have. I suspect that this process of using Alice's public key to verify this message comes from Alice is built into this kind of communication.
+The first two scenarios are plausible because private keys can be stolen and misued. Similarly, without 
+a certificate authority, Bob can be led to believe that the public key belonging to Mal is actually 
+Alice's public key. The last scenario is less likely because it assumes that Bob is too lazy to confirm 
+that the message he received from Alice is what she intended for him to have. I suspect that this 
+process of using Alice's public key to verify this message comes from Alice is built into this kind of communication.
 
 5. Sig_CA = E(S_CA, H(TBS)) where TBS = ["bob.com" || P_B]
 
-6. Alice and Bob can begin by completing a DH key exchange. Bob can send Alice his Cert_B during this stage as well.  To confirm that Alice is talking with Bob, she sends Bob a random number R, and he responds with E(S_B, H(K||R)). Alice computes E(P_B, E(S_B, H(K||R))) and is left with H'(K||R). Alice computes H(K||R), and if H(K||R) == H'(K||R), Alice knows she is speaking with Bob. She then sends AES(K,M) to Bob, and they continue to communicate using AES.
+6. Alice and Bob can begin by completing a DH key exchange. Bob can send Alice his Cert_B during this 
+stage as well.  To confirm that Alice is talking with Bob, she sends Bob a random number R, and he responds 
+with E(S_B, H(K||R)). Alice computes E(P_B, E(S_B, H(K||R))) and is left with H'(K||R). Alice 
+computes H(K||R), and if H(K||R) == H'(K||R), Alice knows she is speaking with Bob. She then sends 
+AES(K,M) to Bob, and they continue to communicate using AES.
 
 7.	- Mal steals Bob's secret key and responds to Alice with E(S_B, H(K||R)), convincing her that she is actually talking with Bob.
-	- Mal pretends to be Bob, so the Certificate Authority gives Bob's certificate to Mal. CA fails to successfully verify that they are giving the Certificate to Bob.
+	- Mal pretends to be Bob, so the Certificate Authority gives Bob's certificate to Mal. CA fails to successfully 
+	  verify that they are giving the Certificate to Bob.
 	- Mal creates their own Certificate Authority to verify whatever they need.
 	- Mal gets access to Certificate Authority's secret key.
-	- Mal knows 'a' or 'b' and computes 'K' to validate the random number challenge and have access to Alice and Bob's encrypted messages.
+	- Mal knows 'a' or 'b' and computes 'K' to validate the random number challenge and have access to Alice and 
+	  Bob's encrypted messages.
 	- Mal gets direct access to Bob's computer.
 
 
