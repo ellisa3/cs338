@@ -1,0 +1,32 @@
+===== AUTHOR =====
+Kai Johnson, Angela Ellis
+===== ANALYSIS =====
+STRIDE threat analysis
+  + stealing someone else's tapir account (to ruin their good name, steal their super-secrete tapir pics, etc)
+    - STRIDE categories: tampering (change their fanfiction and make it super bad)
+                         elevation of privilege (can now do things they weren't allowed to)
+                         information disclosure (can read DMs about tapir roleplay)
+    - mitigation: require a password of x length and y complexity (steal google's tool for this or whatever)
+                  notifying email on file about uncharacteristic behavior (location--which means we're tracking that, etc.)
+  + DOS attack (overwhelm the server with queries so that no-one else can access the site)
+      - cat: DOS (surprise!)
+             repudiation - if the attackers are smart, they won't be overwhelming us from one computer in some warehouse; too many people to track?
+      - mit: limit the amount of requests that can come from a certain location/IP address (which...can be circumvented super easily, but oh well)
+             make it Linode's problem--sue the F*CK out of them if they don't take care of it for us. We get court money, they get nothing...win win!
+ + Break the hardware/servers that are hosting the website
+     - cat: DOS / tampering
+     - mit: Security guards (with livable wage so that they can't be bribed)
+            Make Linode liable (in the contract) and make THEM pay for the security guards
+  + pretending to be a different user (by using their username, or whitespaced "Angela" vs. "Angela ") (to ruin their good name, etc)
+      - STRIDE categories: spoofing (pretending to be someone else)
+      - mitigation: require unique usernames (and remove trailing/prepending whitespace)
+  + accessing database to modify it (eg through sql injection in credential or other data-submitting forms)
+      - cat: tampering (changing the database)
+             information disclosure (POST query? maybe? I've never done one such attack I swear!)
+      - mit: do the method thing we learned about in Software Development (limiting characters, etc) to ensure that user-generated-text is not treated as actual query
+  + Illegally traffic Tapirs (or pelts, or whatever--something illegal), cut Jeff a cut -- that is, make him aware of the illegality that is happening on the site that he is hosting, and buy him into the scheme -- and then use that info (that something illegal is happening, Jeff knows about it, and Jeff is not doing anything to stop it) to shut down the website (send info on Jeff's involvement to the government).
+      - cat: DOS,
+      - mit: Jeff behaves morally.
+             Jeff hires very good lawyers (~public interest technologists~).
+             Spread hosting out across several people/entities, so if one of them engages in illegal action (without the others knowing) then the service can be provided by the others. Necessitates them not all being in cahoots.
+ 
