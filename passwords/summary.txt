@@ -1,0 +1,64 @@
+Part 1
+Total time: 10:28
+Number of hashes computed: 267,751
+Passwords cracked: 2805
+Time per hash computed: 0.0023
+Time per password cracked: 0.22
+Passwords cracked per number of hashes computed: 0.0105
+
+Part 2
+Total time: [user time from a "time" command]
+Number of hashes computed: [count of the # of hashes computed]
+Passwords cracked: [number cracked]
+Time per hash computed: [seconds per hash]
+Time per password cracked: [seconds per password]
+Passwords cracked per number of hashes computed: [passwords per hash]
+
+Part 3
+Total time: 33:19
+Number of hashes computed: 751,041,555
+Passwords cracked: 2805
+Time per hash computed: 2.66 x 10^-6
+Time per password cracked: 0.712
+Passwords cracked per number of hashes computed: 3.73 x 10^-6
+
+Analysis:
+- Did your time per hash computed change between phases? By what factor? Why?
+  Yes, part 3 hashes were computed faster by a factor of ~ 864. This was because
+  part 3 had more time to run.
+
+- Did your time per password crack change between phases? By what factor? Why?
+  Yes, part 3 was slower by a factor of 309. I think this is because there
+  was the extra step involving the salt that slowed down the process.
+
+- Suppose you wanted to precompute all the hashes for each possible password
+so you could just look up the password in a table indexed by the hash. How much
+memory would be required for each phase?
+
+  Assuming that there the words.txt file contains all the possible passwords, there
+  are 267,751 unique passwords.
+  password storage = 16 bytes * 267,751 passwords
+  hash storage = 32 bytes * 267,751 hashes
+  hash mapping = 32 bytes * 267,751 hash mappings
+
+  21,420,080 bytes, or 21.4208 megabytes.
+
+
+- Give 3-4 reasons we should store password hashes and not the passwords themselves.
+Think in terms of threats, who the attackers might be, etc.
+
+  If the passwords themselves are stored, then
+
+  - the passwords themselves must be sent over the internet. Eavesdroppers and
+    people in the middle could then gain access to the password. If a malefactor
+    intercepts a hash, they could not discern the password from the hash.
+
+  - they sit in plain sight on a database somewhere. If an attacker hacks into
+    the database, then they have access to the passwords (and corresponding usernames).
+    Similar to the situation above, if an attacker hacks into a database of hashed
+    passwords, they could not discern the passwords from the hashes.
+
+  - similar to the previous example, someone with access to the database, an employee
+    for example, can easily access the passwords and corresponding usernames and
+    wreak havoc. If the passwords are hashed, then there is less of a risk of
+    misuse when that employee has access to them.
