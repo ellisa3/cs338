@@ -1,0 +1,20 @@
+Angela Ellis in collaboration with Kai Johnson
+
+a] Kali's MAC Address: 00:0c:29:6d:09:89
+b] Kali's IP Address: 192.168.182.128
+c] Metasploitable MAC: 00:0c:29:10:bd:11
+d] Metasploitable IP: 192.168.182.129
+e] img routing_table
+f] img ARP_cache
+g] img metasploitable
+h] ""
+i] 00:50:56:ee:7e:94, MAC Address of IP 192.168.182.2
+  This the routing machine for Metasploitable. Because the requested HTTP do not exist
+  locally on Metasploitable, it has to go beyond its own network to find it. The
+  router, aka gateway, is the next step in receiving the HTTP.
+j] Metasploitable terminal contains html. Capture.jpeg
+k]
+
+
+
+https://wiki.amahi.org/index.php/Find_Your_Gateway_IP
